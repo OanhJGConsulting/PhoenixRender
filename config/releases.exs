@@ -6,7 +6,7 @@ import Config
 # and secrets from environment variables or elsewhere. Do not define
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
-# config :sendend_tech_app, SendendTechAppWeb.Endpoint, server: true
+config :sendend_tech_app, SendendTechAppWeb.Endpoint, server: true
 
 # ## Using releases
 #
@@ -35,16 +35,21 @@ if config_env() == :prod do
       """
 
   # host = System.get_env("PHX_HOST") || "example.com"
-  # port = String.to_integer(System.get_env("PORT") || "4000")
+  port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :phoenix_hello, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :phoenix_hello, PhoenixHelloWeb.Endpoint,
     # url: [host: host, port: 443, scheme: "https"],
+    # http: [
+    #   port: String.to_integer(System.get_env("PORT") || "4000"),
+    #   transport_options: [socket_opts: [:inet6]]
+    # ],
     http: [
+      ip: {0, 0, 0, 0, 0, 0, 0, 0},  # IPv6 binding
       port: String.to_integer(System.get_env("PORT") || "4000"),
-      transport_options: [socket_opts: [:inet6]]
-    ],
+      transport_options: [socket_opts: [:inet]]
+    ]
     # http: [
     #   # Enable IPv6 and bind on all interfaces.
     #   # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
