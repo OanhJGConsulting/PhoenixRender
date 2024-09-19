@@ -6,7 +6,7 @@ import Config
 # and secrets from environment variables or elsewhere. Do not define
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
-config :sendend_tech_app, SendendTechAppWeb.Endpoint, server: true
+# config :sendend_tech_app, SendendTechAppWeb.Endpoint, server: true
 
 # ## Using releases
 #
@@ -34,13 +34,13 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  #host = System.get_env("PHX_HOST") || "example.com"
-  #port = String.to_integer(System.get_env("PORT") || "4000")
+  # host = System.get_env("PHX_HOST") || "example.com"
+  # port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :phoenix_hello, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :phoenix_hello, PhoenixHelloWeb.Endpoint,
-    #url: [host: host, port: 443, scheme: "https"],
+    # url: [host: host, port: 443, scheme: "https"],
     http: [
       port: String.to_integer(System.get_env("PORT") || "4000"),
       transport_options: [socket_opts: [:inet6]]
