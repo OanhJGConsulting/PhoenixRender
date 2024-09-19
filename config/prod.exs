@@ -7,7 +7,9 @@ import Config
 # before starting your production server.
 config :phoenix_hello, PhoenixHelloWeb.Endpoint,
   url: [host: System.get_env("RENDER_EXTERNAL_HOSTNAME") || "localhost", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  server: true
+
+# cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Configures Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: PhoenixHello.Finch
