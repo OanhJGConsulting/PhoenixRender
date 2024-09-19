@@ -35,7 +35,7 @@ if config_env() == :prod do
       """
 
   # host = System.get_env("PHX_HOST") || "example.com"
-  port = String.to_integer(System.get_env("PORT") || "4000")
+  #port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :phoenix_hello, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
@@ -46,10 +46,11 @@ if config_env() == :prod do
     #   transport_options: [socket_opts: [:inet6]]
     # ],
     http: [
-      ip: {0, 0, 0, 0, 0, 0, 0, 0},  # IPv6 binding
+      ip: {0, 0, 0, 0},  # IPv6 binding
       port: String.to_integer(System.get_env("PORT") || "4000"),
-      transport_options: [socket_opts: [:inet]]
-    ]
+      transport_options: [socket_opts: [:inet, :inet6]]
+    ],
+    secret_key_base: secret_key_base
     # http: [
     #   # Enable IPv6 and bind on all interfaces.
     #   # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
@@ -58,7 +59,7 @@ if config_env() == :prod do
     #   ip: {0, 0, 0, 0, 0, 0, 0, 0},
     #   port: port
     # ],
-    secret_key_base: secret_key_base
+    
 
   # ## SSL Support
   #
